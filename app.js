@@ -8233,6 +8233,121 @@ var _elm_lang$html$Html_Attributes$classList = function (list) {
 };
 var _elm_lang$html$Html_Attributes$style = _elm_lang$virtual_dom$VirtualDom$style;
 
+var _elm_lang$html$Html_Events$keyCode = A2(_elm_lang$core$Json_Decode$field, 'keyCode', _elm_lang$core$Json_Decode$int);
+var _elm_lang$html$Html_Events$targetChecked = A2(
+	_elm_lang$core$Json_Decode$at,
+	{
+		ctor: '::',
+		_0: 'target',
+		_1: {
+			ctor: '::',
+			_0: 'checked',
+			_1: {ctor: '[]'}
+		}
+	},
+	_elm_lang$core$Json_Decode$bool);
+var _elm_lang$html$Html_Events$targetValue = A2(
+	_elm_lang$core$Json_Decode$at,
+	{
+		ctor: '::',
+		_0: 'target',
+		_1: {
+			ctor: '::',
+			_0: 'value',
+			_1: {ctor: '[]'}
+		}
+	},
+	_elm_lang$core$Json_Decode$string);
+var _elm_lang$html$Html_Events$defaultOptions = _elm_lang$virtual_dom$VirtualDom$defaultOptions;
+var _elm_lang$html$Html_Events$onWithOptions = _elm_lang$virtual_dom$VirtualDom$onWithOptions;
+var _elm_lang$html$Html_Events$on = _elm_lang$virtual_dom$VirtualDom$on;
+var _elm_lang$html$Html_Events$onFocus = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'focus',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onBlur = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'blur',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onSubmitOptions = _elm_lang$core$Native_Utils.update(
+	_elm_lang$html$Html_Events$defaultOptions,
+	{preventDefault: true});
+var _elm_lang$html$Html_Events$onSubmit = function (msg) {
+	return A3(
+		_elm_lang$html$Html_Events$onWithOptions,
+		'submit',
+		_elm_lang$html$Html_Events$onSubmitOptions,
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onCheck = function (tagger) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'change',
+		A2(_elm_lang$core$Json_Decode$map, tagger, _elm_lang$html$Html_Events$targetChecked));
+};
+var _elm_lang$html$Html_Events$onInput = function (tagger) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'input',
+		A2(_elm_lang$core$Json_Decode$map, tagger, _elm_lang$html$Html_Events$targetValue));
+};
+var _elm_lang$html$Html_Events$onMouseOut = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mouseout',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onMouseOver = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mouseover',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onMouseLeave = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mouseleave',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onMouseEnter = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mouseenter',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onMouseUp = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mouseup',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onMouseDown = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mousedown',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onDoubleClick = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'dblclick',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onClick = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'click',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$Options = F2(
+	function (a, b) {
+		return {stopPropagation: a, preventDefault: b};
+	});
+
 var _elm_lang$svg$Svg$map = _elm_lang$virtual_dom$VirtualDom$map;
 var _elm_lang$svg$Svg$text = _elm_lang$virtual_dom$VirtualDom$text;
 var _elm_lang$svg$Svg$svgNamespace = A2(
@@ -8773,481 +8888,21 @@ var _user$project$BST$minimum = function (tree) {
 	}
 };
 
-var _user$project$Main$numList = {
-	ctor: '::',
-	_0: 60,
-	_1: {
-		ctor: '::',
-		_0: 88,
-		_1: {
-			ctor: '::',
-			_0: 6,
-			_1: {
-				ctor: '::',
-				_0: 72,
-				_1: {
-					ctor: '::',
-					_0: 92,
-					_1: {
-						ctor: '::',
-						_0: 56,
-						_1: {
-							ctor: '::',
-							_0: 90,
-							_1: {
-								ctor: '::',
-								_0: 19,
-								_1: {
-									ctor: '::',
-									_0: 19,
-									_1: {
-										ctor: '::',
-										_0: 51,
-										_1: {
-											ctor: '::',
-											_0: 74,
-											_1: {
-												ctor: '::',
-												_0: 75,
-												_1: {
-													ctor: '::',
-													_0: 77,
-													_1: {
-														ctor: '::',
-														_0: 2,
-														_1: {
-															ctor: '::',
-															_0: 17,
-															_1: {
-																ctor: '::',
-																_0: 66,
-																_1: {
-																	ctor: '::',
-																	_0: 86,
-																	_1: {
-																		ctor: '::',
-																		_0: 3,
-																		_1: {
-																			ctor: '::',
-																			_0: 39,
-																			_1: {
-																				ctor: '::',
-																				_0: 41,
-																				_1: {
-																					ctor: '::',
-																					_0: 16,
-																					_1: {
-																						ctor: '::',
-																						_0: 40,
-																						_1: {
-																							ctor: '::',
-																							_0: 16,
-																							_1: {
-																								ctor: '::',
-																								_0: 14,
-																								_1: {
-																									ctor: '::',
-																									_0: 12,
-																									_1: {
-																										ctor: '::',
-																										_0: 14,
-																										_1: {
-																											ctor: '::',
-																											_0: 41,
-																											_1: {
-																												ctor: '::',
-																												_0: 29,
-																												_1: {
-																													ctor: '::',
-																													_0: 15,
-																													_1: {
-																														ctor: '::',
-																														_0: 79,
-																														_1: {
-																															ctor: '::',
-																															_0: 35,
-																															_1: {
-																																ctor: '::',
-																																_0: 89,
-																																_1: {
-																																	ctor: '::',
-																																	_0: 35,
-																																	_1: {
-																																		ctor: '::',
-																																		_0: 47,
-																																		_1: {
-																																			ctor: '::',
-																																			_0: 56,
-																																			_1: {
-																																				ctor: '::',
-																																				_0: 82,
-																																				_1: {
-																																					ctor: '::',
-																																					_0: 24,
-																																					_1: {
-																																						ctor: '::',
-																																						_0: 74,
-																																						_1: {
-																																							ctor: '::',
-																																							_0: 0,
-																																							_1: {
-																																								ctor: '::',
-																																								_0: 57,
-																																								_1: {
-																																									ctor: '::',
-																																									_0: 36,
-																																									_1: {
-																																										ctor: '::',
-																																										_0: 29,
-																																										_1: {
-																																											ctor: '::',
-																																											_0: 71,
-																																											_1: {
-																																												ctor: '::',
-																																												_0: 17,
-																																												_1: {
-																																													ctor: '::',
-																																													_0: 83,
-																																													_1: {
-																																														ctor: '::',
-																																														_0: 21,
-																																														_1: {
-																																															ctor: '::',
-																																															_0: 97,
-																																															_1: {
-																																																ctor: '::',
-																																																_0: 61,
-																																																_1: {
-																																																	ctor: '::',
-																																																	_0: 99,
-																																																	_1: {
-																																																		ctor: '::',
-																																																		_0: 45,
-																																																		_1: {
-																																																			ctor: '::',
-																																																			_0: 48,
-																																																			_1: {
-																																																				ctor: '::',
-																																																				_0: 14,
-																																																				_1: {
-																																																					ctor: '::',
-																																																					_0: 46,
-																																																					_1: {
-																																																						ctor: '::',
-																																																						_0: 35,
-																																																						_1: {
-																																																							ctor: '::',
-																																																							_0: 16,
-																																																							_1: {
-																																																								ctor: '::',
-																																																								_0: 28,
-																																																								_1: {
-																																																									ctor: '::',
-																																																									_0: 89,
-																																																									_1: {
-																																																										ctor: '::',
-																																																										_0: 62,
-																																																										_1: {
-																																																											ctor: '::',
-																																																											_0: 1,
-																																																											_1: {
-																																																												ctor: '::',
-																																																												_0: 91,
-																																																												_1: {
-																																																													ctor: '::',
-																																																													_0: 3,
-																																																													_1: {
-																																																														ctor: '::',
-																																																														_0: 50,
-																																																														_1: {
-																																																															ctor: '::',
-																																																															_0: 40,
-																																																															_1: {
-																																																																ctor: '::',
-																																																																_0: 29,
-																																																																_1: {
-																																																																	ctor: '::',
-																																																																	_0: 61,
-																																																																	_1: {
-																																																																		ctor: '::',
-																																																																		_0: 41,
-																																																																		_1: {
-																																																																			ctor: '::',
-																																																																			_0: 94,
-																																																																			_1: {
-																																																																				ctor: '::',
-																																																																				_0: 66,
-																																																																				_1: {
-																																																																					ctor: '::',
-																																																																					_0: 86,
-																																																																					_1: {
-																																																																						ctor: '::',
-																																																																						_0: 99,
-																																																																						_1: {
-																																																																							ctor: '::',
-																																																																							_0: 78,
-																																																																							_1: {
-																																																																								ctor: '::',
-																																																																								_0: 86,
-																																																																								_1: {
-																																																																									ctor: '::',
-																																																																									_0: 88,
-																																																																									_1: {
-																																																																										ctor: '::',
-																																																																										_0: 47,
-																																																																										_1: {
-																																																																											ctor: '::',
-																																																																											_0: 97,
-																																																																											_1: {
-																																																																												ctor: '::',
-																																																																												_0: 81,
-																																																																												_1: {
-																																																																													ctor: '::',
-																																																																													_0: 37,
-																																																																													_1: {
-																																																																														ctor: '::',
-																																																																														_0: 34,
-																																																																														_1: {
-																																																																															ctor: '::',
-																																																																															_0: 84,
-																																																																															_1: {
-																																																																																ctor: '::',
-																																																																																_0: 81,
-																																																																																_1: {
-																																																																																	ctor: '::',
-																																																																																	_0: 80,
-																																																																																	_1: {
-																																																																																		ctor: '::',
-																																																																																		_0: 84,
-																																																																																		_1: {
-																																																																																			ctor: '::',
-																																																																																			_0: 66,
-																																																																																			_1: {
-																																																																																				ctor: '::',
-																																																																																				_0: 61,
-																																																																																				_1: {
-																																																																																					ctor: '::',
-																																																																																					_0: 20,
-																																																																																					_1: {
-																																																																																						ctor: '::',
-																																																																																						_0: 99,
-																																																																																						_1: {
-																																																																																							ctor: '::',
-																																																																																							_0: 11,
-																																																																																							_1: {
-																																																																																								ctor: '::',
-																																																																																								_0: 11,
-																																																																																								_1: {
-																																																																																									ctor: '::',
-																																																																																									_0: 3,
-																																																																																									_1: {
-																																																																																										ctor: '::',
-																																																																																										_0: 12,
-																																																																																										_1: {
-																																																																																											ctor: '::',
-																																																																																											_0: 13,
-																																																																																											_1: {
-																																																																																												ctor: '::',
-																																																																																												_0: 43,
-																																																																																												_1: {
-																																																																																													ctor: '::',
-																																																																																													_0: 75,
-																																																																																													_1: {
-																																																																																														ctor: '::',
-																																																																																														_0: 84,
-																																																																																														_1: {
-																																																																																															ctor: '::',
-																																																																																															_0: 29,
-																																																																																															_1: {
-																																																																																																ctor: '::',
-																																																																																																_0: 54,
-																																																																																																_1: {
-																																																																																																	ctor: '::',
-																																																																																																	_0: 73,
-																																																																																																	_1: {
-																																																																																																		ctor: '::',
-																																																																																																		_0: 26,
-																																																																																																		_1: {
-																																																																																																			ctor: '::',
-																																																																																																			_0: 80,
-																																																																																																			_1: {
-																																																																																																				ctor: '::',
-																																																																																																				_0: 39,
-																																																																																																				_1: {ctor: '[]'}
-																																																																																																			}
-																																																																																																		}
-																																																																																																	}
-																																																																																																}
-																																																																																															}
-																																																																																														}
-																																																																																													}
-																																																																																												}
-																																																																																											}
-																																																																																										}
-																																																																																									}
-																																																																																								}
-																																																																																							}
-																																																																																						}
-																																																																																					}
-																																																																																				}
-																																																																																			}
-																																																																																		}
-																																																																																	}
-																																																																																}
-																																																																															}
-																																																																														}
-																																																																													}
-																																																																												}
-																																																																											}
-																																																																										}
-																																																																									}
-																																																																								}
-																																																																							}
-																																																																						}
-																																																																					}
-																																																																				}
-																																																																			}
-																																																																		}
-																																																																	}
-																																																																}
-																																																															}
-																																																														}
-																																																													}
-																																																												}
-																																																											}
-																																																										}
-																																																									}
-																																																								}
-																																																							}
-																																																						}
-																																																					}
-																																																				}
-																																																			}
-																																																		}
-																																																	}
-																																																}
-																																															}
-																																														}
-																																													}
-																																												}
-																																											}
-																																										}
-																																									}
-																																								}
-																																							}
-																																						}
-																																					}
-																																				}
-																																			}
-																																		}
-																																	}
-																																}
-																															}
-																														}
-																													}
-																												}
-																											}
-																										}
-																									}
-																								}
-																							}
-																						}
-																					}
-																				}
-																			}
-																		}
-																	}
-																}
-															}
-														}
-													}
-												}
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
+var _user$project$Model$init = {
+	tree: _user$project$BST$fromList(
+		{ctor: '[]'}),
+	input: _elm_lang$core$Maybe$Nothing
 };
-var _user$project$Main$numList2 = {
-	ctor: '::',
-	_0: 5,
-	_1: {
-		ctor: '::',
-		_0: 2,
-		_1: {
-			ctor: '::',
-			_0: 8,
-			_1: {
-				ctor: '::',
-				_0: 0,
-				_1: {
-					ctor: '::',
-					_0: 1,
-					_1: {
-						ctor: '::',
-						_0: 3,
-						_1: {
-							ctor: '::',
-							_0: 4,
-							_1: {
-								ctor: '::',
-								_0: 6,
-								_1: {
-									ctor: '::',
-									_0: 7,
-									_1: {
-										ctor: '::',
-										_0: 9,
-										_1: {
-											ctor: '::',
-											_0: 10,
-											_1: {ctor: '[]'}
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-};
-var _user$project$Main$numList1 = {
-	ctor: '::',
-	_0: 5,
-	_1: {
-		ctor: '::',
-		_0: 4,
-		_1: {
-			ctor: '::',
-			_0: 3,
-			_1: {
-				ctor: '::',
-				_0: 6,
-				_1: {
-					ctor: '::',
-					_0: 8,
-					_1: {ctor: '[]'}
-				}
-			}
-		}
-	}
-};
-var _user$project$Main$update = F2(
-	function (msg, model) {
-		return A2(
-			_elm_lang$core$Platform_Cmd_ops['!'],
-			model,
-			{ctor: '[]'});
+var _user$project$Model$Model = F2(
+	function (a, b) {
+		return {tree: a, input: b};
 	});
-var _user$project$Main$draw = F2(
+var _user$project$Model$Add = {ctor: 'Add'};
+var _user$project$Model$Input = function (a) {
+	return {ctor: 'Input', _0: a};
+};
+
+var _user$project$View$draw = F2(
 	function (radius, _p0) {
 		var _p1 = _p0;
 		var _p3 = _p1.y;
@@ -9313,56 +8968,56 @@ var _user$project$Main$draw = F2(
 				_1: {
 					ctor: '::',
 					_0: A2(
-						_elm_lang$svg$Svg$text_,
-						{
-							ctor: '::',
-							_0: _elm_lang$svg$Svg_Attributes$x(
-								_elm_lang$core$Basics$toString(_p2)),
-							_1: {
-								ctor: '::',
-								_0: _elm_lang$svg$Svg_Attributes$y(
-									_elm_lang$core$Basics$toString(_p3)),
-								_1: {
-									ctor: '::',
-									_0: _elm_lang$svg$Svg_Attributes$fill('black'),
-									_1: {
-										ctor: '::',
-										_0: _elm_lang$svg$Svg_Attributes$fontSize(
-											_elm_lang$core$Basics$toString(radius / 2)),
-										_1: {
-											ctor: '::',
-											_0: _elm_lang$svg$Svg_Attributes$textAnchor('middle'),
-											_1: {ctor: '[]'}
-										}
-									}
-								}
-							}
-						},
-						{
-							ctor: '::',
-							_0: _elm_lang$svg$Svg$text(
-								_elm_lang$core$Basics$toString(_p1.val)),
-							_1: {ctor: '[]'}
-						}),
+						_elm_lang$core$Maybe$withDefault,
+						_elm_lang$svg$Svg$text(''),
+						A2(_elm_lang$core$Maybe$map, drawLine, _p1.left)),
 					_1: {
 						ctor: '::',
 						_0: A2(
 							_elm_lang$core$Maybe$withDefault,
 							_elm_lang$svg$Svg$text(''),
-							A2(_elm_lang$core$Maybe$map, drawLine, _p1.left)),
+							A2(_elm_lang$core$Maybe$map, drawLine, _p1.right)),
 						_1: {
 							ctor: '::',
 							_0: A2(
-								_elm_lang$core$Maybe$withDefault,
-								_elm_lang$svg$Svg$text(''),
-								A2(_elm_lang$core$Maybe$map, drawLine, _p1.right)),
+								_elm_lang$svg$Svg$text_,
+								{
+									ctor: '::',
+									_0: _elm_lang$svg$Svg_Attributes$x(
+										_elm_lang$core$Basics$toString(_p2)),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$svg$Svg_Attributes$y(
+											_elm_lang$core$Basics$toString(_p3 + (radius / 4))),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$svg$Svg_Attributes$fill('black'),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$svg$Svg_Attributes$fontSize(
+													_elm_lang$core$Basics$toString(radius)),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$svg$Svg_Attributes$textAnchor('middle'),
+													_1: {ctor: '[]'}
+												}
+											}
+										}
+									}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$svg$Svg$text(
+										_elm_lang$core$Basics$toString(_p1.val)),
+									_1: {ctor: '[]'}
+								}),
 							_1: {ctor: '[]'}
 						}
 					}
 				}
 			});
 	});
-var _user$project$Main$exchange = F2(
+var _user$project$View$exchange = F2(
 	function (x, tree) {
 		var _p4 = tree;
 		if (_p4.ctor === 'Leaf') {
@@ -9374,10 +9029,10 @@ var _user$project$Main$exchange = F2(
 		} else {
 			var _p8 = _p4._2;
 			var _p7 = _p4._0;
-			var _p5 = A2(_user$project$Main$exchange, x, _p7);
+			var _p5 = A2(_user$project$View$exchange, x, _p7);
 			var lx = _p5._0;
 			var lli = _p5._1;
-			var _p6 = A2(_user$project$Main$exchange, lx + 1, _p8);
+			var _p6 = A2(_user$project$View$exchange, lx + 1, _p8);
 			var rx = _p6._0;
 			var rli = _p6._1;
 			var $this = {
@@ -9417,27 +9072,27 @@ var _user$project$Main$exchange = F2(
 			};
 		}
 	});
-var _user$project$Main$height = 640;
-var _user$project$Main$yScale = F2(
+var _user$project$View$height = 640;
+var _user$project$View$yScale = F2(
 	function (t, n) {
-		return (_user$project$Main$height / _elm_lang$core$Basics$toFloat(
+		return (_user$project$View$height / _elm_lang$core$Basics$toFloat(
 			_user$project$BST$depth(t))) * n;
 	});
-var _user$project$Main$width = 1024;
-var _user$project$Main$xScale = F2(
+var _user$project$View$width = 640;
+var _user$project$View$xScale = F2(
 	function (t, n) {
-		return (_user$project$Main$width / _elm_lang$core$Basics$toFloat(
+		return (_user$project$View$width / _elm_lang$core$Basics$toFloat(
 			_user$project$BST$num(t))) * n;
 	});
-var _user$project$Main$drawTree = function (tree) {
+var _user$project$View$drawTree = function (tree) {
 	var depth = _elm_lang$core$Basics$toFloat(
 		_user$project$BST$depth(tree));
-	var radius = (_user$project$Main$width / _elm_lang$core$Basics$toFloat(
+	var radius = (_user$project$View$width / _elm_lang$core$Basics$toFloat(
 		_user$project$BST$num(tree))) / 2;
 	var scaler = function (_p9) {
 		var _p10 = _p9;
-		var yScaler = _user$project$Main$yScale(tree);
-		var xScaler = _user$project$Main$xScale(tree);
+		var yScaler = _user$project$View$yScale(tree);
+		var xScaler = _user$project$View$xScale(tree);
 		return {
 			x: xScaler(_p10.x) + radius,
 			y: A2(
@@ -9450,13 +9105,13 @@ var _user$project$Main$drawTree = function (tree) {
 		};
 	};
 	var list = _elm_lang$core$Tuple$second(
-		A2(_user$project$Main$exchange, 0, tree));
+		A2(_user$project$View$exchange, 0, tree));
 	return A2(
 		_elm_lang$svg$Svg$g,
 		{ctor: '[]'},
 		A2(
 			_elm_lang$core$List$map,
-			_user$project$Main$draw(radius),
+			_user$project$View$draw(radius),
 			A2(
 				_elm_lang$core$List$map,
 				function (_p11) {
@@ -9471,81 +9126,170 @@ var _user$project$Main$drawTree = function (tree) {
 				},
 				list)));
 };
-var _user$project$Main$view = function (model) {
+var _user$project$View$view = function (model) {
 	return A2(
-		_elm_lang$svg$Svg$svg,
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
 		{
 			ctor: '::',
-			_0: _elm_lang$svg$Svg_Attributes$width(
-				_elm_lang$core$Basics$toString(_user$project$Main$width)),
+			_0: A2(
+				_elm_lang$html$Html$input,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Events$onInput(_user$project$Model$Input),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$value(
+							A2(
+								_elm_lang$core$Maybe$withDefault,
+								'',
+								A2(_elm_lang$core$Maybe$map, _elm_lang$core$Basics$toString, model.input))),
+						_1: {ctor: '[]'}
+					}
+				},
+				{ctor: '[]'}),
 			_1: {
 				ctor: '::',
-				_0: _elm_lang$svg$Svg_Attributes$height(
-					_elm_lang$core$Basics$toString(_user$project$Main$height)),
+				_0: A2(
+					_elm_lang$html$Html$button,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Events$onClick(_user$project$Model$Add),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('Add'),
+						_1: {ctor: '[]'}
+					}),
 				_1: {
 					ctor: '::',
-					_0: _elm_lang$svg$Svg_Attributes$viewBox(
-						A2(
-							_elm_lang$core$String$join,
-							' ',
-							A2(
-								_elm_lang$core$List$map,
-								_elm_lang$core$Basics$toString,
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$style(
 								{
 									ctor: '::',
-									_0: 0,
+									_0: {ctor: '_Tuple2', _0: 'margin', _1: '10px'},
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$svg$Svg$svg,
+								{
+									ctor: '::',
+									_0: _elm_lang$svg$Svg_Attributes$width(
+										_elm_lang$core$Basics$toString(_user$project$View$width)),
 									_1: {
 										ctor: '::',
-										_0: 0,
+										_0: _elm_lang$svg$Svg_Attributes$height(
+											_elm_lang$core$Basics$toString(_user$project$View$height)),
 										_1: {
 											ctor: '::',
-											_0: _user$project$Main$width,
+											_0: _elm_lang$svg$Svg_Attributes$viewBox(
+												A2(
+													_elm_lang$core$String$join,
+													' ',
+													A2(
+														_elm_lang$core$List$map,
+														_elm_lang$core$Basics$toString,
+														{
+															ctor: '::',
+															_0: 0,
+															_1: {
+																ctor: '::',
+																_0: 0,
+																_1: {
+																	ctor: '::',
+																	_0: _user$project$View$width,
+																	_1: {
+																		ctor: '::',
+																		_0: _user$project$View$height,
+																		_1: {ctor: '[]'}
+																	}
+																}
+															}
+														}))),
 											_1: {
 												ctor: '::',
-												_0: _user$project$Main$height,
+												_0: _elm_lang$html$Html_Attributes$style(
+													{
+														ctor: '::',
+														_0: {ctor: '_Tuple2', _0: 'border', _1: '1px solid black'},
+														_1: {ctor: '[]'}
+													}),
 												_1: {ctor: '[]'}
 											}
 										}
 									}
-								}))),
-					_1: {
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$style(
-							{
-								ctor: '::',
-								_0: {ctor: '_Tuple2', _0: 'border', _1: '1px solid black'},
-								_1: {ctor: '[]'}
-							}),
-						_1: {ctor: '[]'}
-					}
+								},
+								{
+									ctor: '::',
+									_0: _user$project$View$drawTree(model.tree),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
 				}
 			}
-		},
-		{
-			ctor: '::',
-			_0: _user$project$Main$drawTree(model.tree),
-			_1: {ctor: '[]'}
 		});
 };
-var _user$project$Main$Model = function (a) {
-	return {tree: a};
-};
+var _user$project$View$Drawable = F5(
+	function (a, b, c, d, e) {
+		return {x: a, y: b, val: c, left: d, right: e};
+	});
+
+var _user$project$Update$update = F2(
+	function (msg, model) {
+		var _p0 = msg;
+		if (_p0.ctor === 'Input') {
+			return A2(
+				_elm_lang$core$Platform_Cmd_ops['!'],
+				_elm_lang$core$Native_Utils.update(
+					model,
+					{
+						input: function (_p1) {
+							return _elm_lang$core$Result$toMaybe(
+								_elm_lang$core$String$toInt(_p1));
+						}(_p0._0)
+					}),
+				{ctor: '[]'});
+		} else {
+			var _p2 = model.input;
+			if (_p2.ctor === 'Just') {
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{
+							tree: A2(_user$project$BST$insert, _p2._0, model.tree),
+							input: _elm_lang$core$Maybe$Nothing
+						}),
+					{ctor: '[]'});
+			} else {
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					model,
+					{ctor: '[]'});
+			}
+		}
+	});
+
 var _user$project$Main$main = _elm_lang$html$Html$program(
 	{
 		init: A2(
 			_elm_lang$core$Platform_Cmd_ops['!'],
-			_user$project$Main$Model(
-				_user$project$BST$fromList(_user$project$Main$numList)),
+			_user$project$Model$init,
 			{ctor: '[]'}),
-		view: _user$project$Main$view,
-		update: _user$project$Main$update,
+		view: _user$project$View$view,
+		update: _user$project$Update$update,
 		subscriptions: _elm_lang$core$Basics$always(_elm_lang$core$Platform_Sub$none)
 	})();
-var _user$project$Main$Drawable = F5(
-	function (a, b, c, d, e) {
-		return {x: a, y: b, val: c, left: d, right: e};
-	});
-var _user$project$Main$NoOp = {ctor: 'NoOp'};
 
 var Elm = {};
 Elm['Main'] = Elm['Main'] || {};
