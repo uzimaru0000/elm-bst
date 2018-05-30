@@ -8689,6 +8689,34 @@ var _elm_lang$svg$Svg_Attributes$accumulate = _elm_lang$virtual_dom$VirtualDom$a
 var _elm_lang$svg$Svg_Attributes$accelerate = _elm_lang$virtual_dom$VirtualDom$attribute('accelerate');
 var _elm_lang$svg$Svg_Attributes$accentHeight = _elm_lang$virtual_dom$VirtualDom$attribute('accent-height');
 
+var _elm_lang$svg$Svg_Events$on = _elm_lang$virtual_dom$VirtualDom$on;
+var _elm_lang$svg$Svg_Events$simpleOn = F2(
+	function (name, msg) {
+		return A2(
+			_elm_lang$svg$Svg_Events$on,
+			name,
+			_elm_lang$core$Json_Decode$succeed(msg));
+	});
+var _elm_lang$svg$Svg_Events$onBegin = _elm_lang$svg$Svg_Events$simpleOn('begin');
+var _elm_lang$svg$Svg_Events$onEnd = _elm_lang$svg$Svg_Events$simpleOn('end');
+var _elm_lang$svg$Svg_Events$onRepeat = _elm_lang$svg$Svg_Events$simpleOn('repeat');
+var _elm_lang$svg$Svg_Events$onAbort = _elm_lang$svg$Svg_Events$simpleOn('abort');
+var _elm_lang$svg$Svg_Events$onError = _elm_lang$svg$Svg_Events$simpleOn('error');
+var _elm_lang$svg$Svg_Events$onResize = _elm_lang$svg$Svg_Events$simpleOn('resize');
+var _elm_lang$svg$Svg_Events$onScroll = _elm_lang$svg$Svg_Events$simpleOn('scroll');
+var _elm_lang$svg$Svg_Events$onLoad = _elm_lang$svg$Svg_Events$simpleOn('load');
+var _elm_lang$svg$Svg_Events$onUnload = _elm_lang$svg$Svg_Events$simpleOn('unload');
+var _elm_lang$svg$Svg_Events$onZoom = _elm_lang$svg$Svg_Events$simpleOn('zoom');
+var _elm_lang$svg$Svg_Events$onActivate = _elm_lang$svg$Svg_Events$simpleOn('activate');
+var _elm_lang$svg$Svg_Events$onClick = _elm_lang$svg$Svg_Events$simpleOn('click');
+var _elm_lang$svg$Svg_Events$onFocusIn = _elm_lang$svg$Svg_Events$simpleOn('focusin');
+var _elm_lang$svg$Svg_Events$onFocusOut = _elm_lang$svg$Svg_Events$simpleOn('focusout');
+var _elm_lang$svg$Svg_Events$onMouseDown = _elm_lang$svg$Svg_Events$simpleOn('mousedown');
+var _elm_lang$svg$Svg_Events$onMouseMove = _elm_lang$svg$Svg_Events$simpleOn('mousemove');
+var _elm_lang$svg$Svg_Events$onMouseOut = _elm_lang$svg$Svg_Events$simpleOn('mouseout');
+var _elm_lang$svg$Svg_Events$onMouseOver = _elm_lang$svg$Svg_Events$simpleOn('mouseover');
+var _elm_lang$svg$Svg_Events$onMouseUp = _elm_lang$svg$Svg_Events$simpleOn('mouseup');
+
 var _user$project$BST$num = function (tree) {
 	var _p0 = tree;
 	if (_p0.ctor === 'Leaf') {
@@ -8777,27 +8805,35 @@ var _user$project$BST$depth = function (tree) {
 			_user$project$BST$depth(_p4._2));
 	}
 };
+var _user$project$BST$getValue = function (tree) {
+	var _p5 = tree;
+	if (_p5.ctor === 'Leaf') {
+		return _elm_lang$core$Maybe$Nothing;
+	} else {
+		return _elm_lang$core$Maybe$Just(_p5._1);
+	}
+};
 var _user$project$BST$search = F2(
 	function (x, tree) {
 		search:
 		while (true) {
-			var _p5 = tree;
-			if (_p5.ctor === 'Leaf') {
+			var _p6 = tree;
+			if (_p6.ctor === 'Leaf') {
 				return false;
 			} else {
-				var _p6 = _p5._1;
-				if (_elm_lang$core$Native_Utils.cmp(x, _p6) < 0) {
-					var _v9 = x,
-						_v10 = _p5._0;
-					x = _v9;
-					tree = _v10;
+				var _p7 = _p6._1;
+				if (_elm_lang$core$Native_Utils.cmp(x, _p7) < 0) {
+					var _v10 = x,
+						_v11 = _p6._0;
+					x = _v10;
+					tree = _v11;
 					continue search;
 				} else {
-					if (_elm_lang$core$Native_Utils.cmp(x, _p6) > 0) {
-						var _v11 = x,
-							_v12 = _p5._2;
-						x = _v11;
-						tree = _v12;
+					if (_elm_lang$core$Native_Utils.cmp(x, _p7) > 0) {
+						var _v12 = x,
+							_v13 = _p6._2;
+						x = _v12;
+						tree = _v13;
 						continue search;
 					} else {
 						return true;
@@ -8812,15 +8848,15 @@ var _user$project$BST$Node = F3(
 	});
 var _user$project$BST$map = F2(
 	function (func, tree) {
-		var _p7 = tree;
-		if (_p7.ctor === 'Leaf') {
+		var _p8 = tree;
+		if (_p8.ctor === 'Leaf') {
 			return tree;
 		} else {
 			return A3(
 				_user$project$BST$Node,
-				A2(_user$project$BST$map, func, _p7._0),
-				func(_p7._1),
-				A2(_user$project$BST$map, func, _p7._2));
+				A2(_user$project$BST$map, func, _p8._0),
+				func(_p8._1),
+				A2(_user$project$BST$map, func, _p8._2));
 		}
 	});
 var _user$project$BST$Leaf = {ctor: 'Leaf'};
@@ -8830,40 +8866,72 @@ var _user$project$BST$singleton = function (v) {
 };
 var _user$project$BST$insert = F2(
 	function (x, tree) {
-		var _p8 = tree;
-		if (_p8.ctor === 'Leaf') {
+		var _p9 = tree;
+		if (_p9.ctor === 'Leaf') {
 			return _user$project$BST$singleton(x);
 		} else {
-			var _p11 = _p8._1;
-			var _p10 = _p8._2;
-			var _p9 = _p8._0;
-			return (_elm_lang$core$Native_Utils.cmp(x, _p11) < 0) ? A3(
+			var _p12 = _p9._1;
+			var _p11 = _p9._2;
+			var _p10 = _p9._0;
+			return (_elm_lang$core$Native_Utils.cmp(x, _p12) < 0) ? A3(
 				_user$project$BST$Node,
-				A2(_user$project$BST$insert, x, _p9),
-				_p11,
-				_p10) : ((_elm_lang$core$Native_Utils.cmp(x, _p11) > 0) ? A3(
+				A2(_user$project$BST$insert, x, _p10),
+				_p12,
+				_p11) : ((_elm_lang$core$Native_Utils.cmp(x, _p12) > 0) ? A3(
 				_user$project$BST$Node,
-				_p9,
-				_p11,
-				A2(_user$project$BST$insert, x, _p10)) : tree);
+				_p10,
+				_p12,
+				A2(_user$project$BST$insert, x, _p11)) : tree);
 		}
 	});
 var _user$project$BST$fromList = function (list) {
 	return A3(_elm_lang$core$List$foldl, _user$project$BST$insert, _user$project$BST$empty, list);
 };
+var _user$project$BST$getLeft = function (tree) {
+	var _p13 = tree;
+	if (_p13.ctor === 'Leaf') {
+		return _user$project$BST$Leaf;
+	} else {
+		return _p13._0;
+	}
+};
+var _user$project$BST$getRight = function (tree) {
+	var _p14 = tree;
+	if (_p14.ctor === 'Leaf') {
+		return _user$project$BST$Leaf;
+	} else {
+		return _p14._2;
+	}
+};
+var _user$project$BST$deleteMin = function (tree) {
+	var _p15 = tree;
+	if (_p15.ctor === 'Leaf') {
+		return _user$project$BST$Leaf;
+	} else {
+		if (_p15._0.ctor === 'Leaf') {
+			return _p15._2;
+		} else {
+			return A3(
+				_user$project$BST$Node,
+				_user$project$BST$deleteMin(_p15._0),
+				_p15._1,
+				_p15._2);
+		}
+	}
+};
 var _user$project$BST$maximum = function (tree) {
 	maximum:
 	while (true) {
-		var _p12 = tree;
-		if (_p12.ctor === 'Leaf') {
+		var _p16 = tree;
+		if (_p16.ctor === 'Leaf') {
 			return _elm_lang$core$Maybe$Nothing;
 		} else {
-			var _p13 = _p12._2;
-			if (_elm_lang$core$Native_Utils.eq(_p13, _user$project$BST$Leaf)) {
-				return _elm_lang$core$Maybe$Just(_p12._1);
+			var _p17 = _p16._2;
+			if (_elm_lang$core$Native_Utils.eq(_p17, _user$project$BST$Leaf)) {
+				return _elm_lang$core$Maybe$Just(_p16._1);
 			} else {
-				var _v16 = _p13;
-				tree = _v16;
+				var _v20 = _p17;
+				tree = _v20;
 				continue maximum;
 			}
 		}
@@ -8872,52 +8940,129 @@ var _user$project$BST$maximum = function (tree) {
 var _user$project$BST$minimum = function (tree) {
 	minimum:
 	while (true) {
-		var _p14 = tree;
-		if (_p14.ctor === 'Leaf') {
+		var _p18 = tree;
+		if (_p18.ctor === 'Leaf') {
 			return _elm_lang$core$Maybe$Nothing;
 		} else {
-			var _p15 = _p14._0;
-			if (_elm_lang$core$Native_Utils.eq(_p15, _user$project$BST$Leaf)) {
-				return _elm_lang$core$Maybe$Just(_p14._1);
+			var _p19 = _p18._0;
+			if (_elm_lang$core$Native_Utils.eq(_p19, _user$project$BST$Leaf)) {
+				return _elm_lang$core$Maybe$Just(_p18._1);
 			} else {
-				var _v18 = _p15;
-				tree = _v18;
+				var _v22 = _p19;
+				tree = _v22;
 				continue minimum;
 			}
 		}
 	}
 };
-
-var _user$project$Model$init = {
-	tree: _user$project$BST$fromList(
-		{ctor: '[]'}),
-	input: _elm_lang$core$Maybe$Nothing
-};
-var _user$project$Model$Model = F2(
-	function (a, b) {
-		return {tree: a, input: b};
+var _user$project$BST$delete = F2(
+	function (x, tree) {
+		var delete_ = F2(
+			function (l, r) {
+				var _p20 = {ctor: '_Tuple2', _0: l, _1: r};
+				_v23_2:
+				do {
+					if (_p20.ctor === '_Tuple2') {
+						if (_p20._0.ctor === 'Leaf') {
+							return _p20._1;
+						} else {
+							if (_p20._1.ctor === 'Leaf') {
+								return _p20._0;
+							} else {
+								break _v23_2;
+							}
+						}
+					} else {
+						break _v23_2;
+					}
+				} while(false);
+				var _p21 = _user$project$BST$minimum(r);
+				if (_p21.ctor === 'Just') {
+					return A3(
+						_user$project$BST$Node,
+						l,
+						_p21._0,
+						_user$project$BST$deleteMin(r));
+				} else {
+					return tree;
+				}
+			});
+		var _p22 = tree;
+		if (_p22.ctor === 'Leaf') {
+			return _user$project$BST$Leaf;
+		} else {
+			var _p25 = _p22._1;
+			var _p24 = _p22._2;
+			var _p23 = _p22._0;
+			return (_elm_lang$core$Native_Utils.cmp(x, _p25) < 0) ? A3(
+				_user$project$BST$Node,
+				A2(_user$project$BST$delete, x, _p23),
+				_p25,
+				_p24) : ((_elm_lang$core$Native_Utils.cmp(x, _p25) > 0) ? A3(
+				_user$project$BST$Node,
+				_p23,
+				_p25,
+				A2(_user$project$BST$delete, x, _p24)) : A2(delete_, _p23, _p24));
+		}
 	});
+
+var _user$project$Model$Model = F4(
+	function (a, b, c, d) {
+		return {strTree: a, numTree: b, input: c, type_: d};
+	});
+var _user$project$Model$ChangeType = function (a) {
+	return {ctor: 'ChangeType', _0: a};
+};
+var _user$project$Model$Delete = function (a) {
+	return {ctor: 'Delete', _0: a};
+};
 var _user$project$Model$Add = {ctor: 'Add'};
 var _user$project$Model$Input = function (a) {
 	return {ctor: 'Input', _0: a};
 };
+var _user$project$Model$String = {ctor: 'String'};
+var _user$project$Model$Number = {ctor: 'Number'};
+var _user$project$Model$init = {
+	strTree: _user$project$BST$fromList(
+		{ctor: '[]'}),
+	numTree: _user$project$BST$fromList(
+		{ctor: '[]'}),
+	input: _elm_lang$core$Maybe$Nothing,
+	type_: _user$project$Model$Number
+};
 
-var _user$project$View$draw = F2(
-	function (radius, _p0) {
+var _user$project$View$onChange = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'change',
+		A2(_elm_lang$core$Json_Decode$map, msg, _elm_lang$html$Html_Events$targetValue));
+};
+var _user$project$View$onEnter = function (msg) {
+	var isEnter = function (code) {
+		return _elm_lang$core$Native_Utils.eq(code, 13) ? _elm_lang$core$Json_Decode$succeed(msg) : _elm_lang$core$Json_Decode$fail('not Enter');
+	};
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'keydown',
+		A2(_elm_lang$core$Json_Decode$andThen, isEnter, _elm_lang$html$Html_Events$keyCode));
+};
+var _user$project$View$draw = F3(
+	function (t, radius, _p0) {
 		var _p1 = _p0;
-		var _p3 = _p1.y;
-		var _p2 = _p1.x;
+		var _p4 = _p1.y;
+		var _p3 = _p1.x;
+		var _p2 = _p1.val;
 		var drawLine = function (p) {
 			return A2(
 				_elm_lang$svg$Svg$line,
 				{
 					ctor: '::',
 					_0: _elm_lang$svg$Svg_Attributes$x1(
-						_elm_lang$core$Basics$toString(_p2)),
+						_elm_lang$core$Basics$toString(_p3)),
 					_1: {
 						ctor: '::',
 						_0: _elm_lang$svg$Svg_Attributes$y1(
-							_elm_lang$core$Basics$toString(_p3)),
+							_elm_lang$core$Basics$toString(_p4)),
 						_1: {
 							ctor: '::',
 							_0: _elm_lang$svg$Svg_Attributes$x2(
@@ -8928,7 +9073,7 @@ var _user$project$View$draw = F2(
 									_elm_lang$core$Basics$toString(p.y)),
 								_1: {
 									ctor: '::',
-									_0: _elm_lang$svg$Svg_Attributes$stroke('blue'),
+									_0: _elm_lang$svg$Svg_Attributes$stroke('#2196F3'),
 									_1: {ctor: '[]'}
 								}
 							}
@@ -8947,19 +9092,25 @@ var _user$project$View$draw = F2(
 					{
 						ctor: '::',
 						_0: _elm_lang$svg$Svg_Attributes$cx(
-							_elm_lang$core$Basics$toString(_p2)),
+							_elm_lang$core$Basics$toString(_p3)),
 						_1: {
 							ctor: '::',
 							_0: _elm_lang$svg$Svg_Attributes$cy(
-								_elm_lang$core$Basics$toString(_p3)),
+								_elm_lang$core$Basics$toString(_p4)),
 							_1: {
 								ctor: '::',
 								_0: _elm_lang$svg$Svg_Attributes$r(
 									_elm_lang$core$Basics$toString(radius)),
 								_1: {
 									ctor: '::',
-									_0: _elm_lang$svg$Svg_Attributes$fill('blue'),
-									_1: {ctor: '[]'}
+									_0: _elm_lang$svg$Svg_Attributes$fill('#2196F3'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$svg$Svg_Events$onClick(
+											_user$project$Model$Delete(
+												_elm_lang$core$Basics$toString(_p2))),
+										_1: {ctor: '[]'}
+									}
 								}
 							}
 						}
@@ -8984,11 +9135,11 @@ var _user$project$View$draw = F2(
 								{
 									ctor: '::',
 									_0: _elm_lang$svg$Svg_Attributes$x(
-										_elm_lang$core$Basics$toString(_p2)),
+										_elm_lang$core$Basics$toString(_p3)),
 									_1: {
 										ctor: '::',
 										_0: _elm_lang$svg$Svg_Attributes$y(
-											_elm_lang$core$Basics$toString(_p3 + (radius / 4))),
+											_elm_lang$core$Basics$toString(_p4 + (radius / 4))),
 										_1: {
 											ctor: '::',
 											_0: _elm_lang$svg$Svg_Attributes$fill('black'),
@@ -9008,7 +9159,7 @@ var _user$project$View$draw = F2(
 								{
 									ctor: '::',
 									_0: _elm_lang$svg$Svg$text(
-										_elm_lang$core$Basics$toString(_p1.val)),
+										_elm_lang$core$Basics$toString(_p2)),
 									_1: {ctor: '[]'}
 								}),
 							_1: {ctor: '[]'}
@@ -9019,40 +9170,40 @@ var _user$project$View$draw = F2(
 	});
 var _user$project$View$exchange = F2(
 	function (x, tree) {
-		var _p4 = tree;
-		if (_p4.ctor === 'Leaf') {
+		var _p5 = tree;
+		if (_p5.ctor === 'Leaf') {
 			return {
 				ctor: '_Tuple2',
 				_0: x,
 				_1: {ctor: '[]'}
 			};
 		} else {
-			var _p8 = _p4._2;
-			var _p7 = _p4._0;
-			var _p5 = A2(_user$project$View$exchange, x, _p7);
-			var lx = _p5._0;
-			var lli = _p5._1;
-			var _p6 = A2(_user$project$View$exchange, lx + 1, _p8);
-			var rx = _p6._0;
-			var rli = _p6._1;
+			var _p9 = _p5._2;
+			var _p8 = _p5._0;
+			var _p6 = A2(_user$project$View$exchange, x, _p8);
+			var lx = _p6._0;
+			var lli = _p6._1;
+			var _p7 = A2(_user$project$View$exchange, lx + 1, _p9);
+			var rx = _p7._0;
+			var rli = _p7._1;
 			var $this = {
 				x: lx,
 				y: _elm_lang$core$Basics$toFloat(
 					_user$project$BST$depth(tree)),
-				val: _p4._1,
-				left: _elm_lang$core$Native_Utils.eq(_p7, _user$project$BST$Leaf) ? _elm_lang$core$Maybe$Nothing : _elm_lang$core$Maybe$Just(
+				val: _p5._1,
+				left: _elm_lang$core$Native_Utils.eq(_p8, _user$project$BST$Leaf) ? _elm_lang$core$Maybe$Nothing : _elm_lang$core$Maybe$Just(
 					{
 						x: (lx - 1) - _elm_lang$core$Basics$toFloat(
-							_user$project$BST$rightNum(_p7)),
-						y: _elm_lang$core$Basics$toFloat(
-							_user$project$BST$depth(_p7))
-					}),
-				right: _elm_lang$core$Native_Utils.eq(_p8, _user$project$BST$Leaf) ? _elm_lang$core$Maybe$Nothing : _elm_lang$core$Maybe$Just(
-					{
-						x: (lx + 1) + _elm_lang$core$Basics$toFloat(
-							_user$project$BST$leftNum(_p8)),
+							_user$project$BST$rightNum(_p8)),
 						y: _elm_lang$core$Basics$toFloat(
 							_user$project$BST$depth(_p8))
+					}),
+				right: _elm_lang$core$Native_Utils.eq(_p9, _user$project$BST$Leaf) ? _elm_lang$core$Maybe$Nothing : _elm_lang$core$Maybe$Just(
+					{
+						x: (lx + 1) + _elm_lang$core$Basics$toFloat(
+							_user$project$BST$leftNum(_p9)),
+						y: _elm_lang$core$Basics$toFloat(
+							_user$project$BST$depth(_p9))
 					})
 			};
 			return {
@@ -9084,47 +9235,160 @@ var _user$project$View$xScale = F2(
 		return (_user$project$View$width / _elm_lang$core$Basics$toFloat(
 			_user$project$BST$num(t))) * n;
 	});
-var _user$project$View$drawTree = function (tree) {
-	var depth = _elm_lang$core$Basics$toFloat(
-		_user$project$BST$depth(tree));
-	var radius = (_user$project$View$width / _elm_lang$core$Basics$toFloat(
-		_user$project$BST$num(tree))) / 2;
-	var scaler = function (_p9) {
-		var _p10 = _p9;
-		var yScaler = _user$project$View$yScale(tree);
-		var xScaler = _user$project$View$xScale(tree);
-		return {
-			x: xScaler(_p10.x) + radius,
-			y: A2(
-				F2(
-					function (x, y) {
-						return x + y;
-					}),
-				radius,
-				yScaler(depth - _p10.y))
+var _user$project$View$drawTree = F2(
+	function (t, tree) {
+		var depth = _elm_lang$core$Basics$toFloat(
+			_user$project$BST$depth(tree));
+		var radius = (_user$project$View$width / _elm_lang$core$Basics$toFloat(
+			_user$project$BST$num(tree))) / 2;
+		var scaler = function (_p10) {
+			var _p11 = _p10;
+			var yScaler = _user$project$View$yScale(tree);
+			var xScaler = _user$project$View$xScale(tree);
+			return {
+				x: xScaler(_p11.x) + radius,
+				y: A2(
+					F2(
+						function (x, y) {
+							return x + y;
+						}),
+					radius,
+					yScaler(depth - _p11.y))
+			};
 		};
-	};
-	var list = _elm_lang$core$Tuple$second(
-		A2(_user$project$View$exchange, 0, tree));
-	return A2(
-		_elm_lang$svg$Svg$g,
-		{ctor: '[]'},
-		A2(
-			_elm_lang$core$List$map,
-			_user$project$View$draw(radius),
+		var list = _elm_lang$core$Tuple$second(
+			A2(_user$project$View$exchange, 0, tree));
+		return A2(
+			_elm_lang$svg$Svg$g,
+			{ctor: '[]'},
 			A2(
 				_elm_lang$core$List$map,
-				function (_p11) {
-					var _p12 = _p11;
-					var _p13 = _p12;
-					var newPos = scaler(_p13);
-					var newRight = A2(_elm_lang$core$Maybe$map, scaler, _p12.right);
-					var newLeft = A2(_elm_lang$core$Maybe$map, scaler, _p12.left);
-					return _elm_lang$core$Native_Utils.update(
-						_p13,
-						{x: newPos.x, y: newPos.y, left: newLeft, right: newRight});
-				},
-				list)));
+				A2(_user$project$View$draw, t, radius),
+				A2(
+					_elm_lang$core$List$map,
+					function (_p12) {
+						var _p13 = _p12;
+						var _p14 = _p13;
+						var newPos = scaler(_p14);
+						var newRight = A2(_elm_lang$core$Maybe$map, scaler, _p13.right);
+						var newLeft = A2(_elm_lang$core$Maybe$map, scaler, _p13.left);
+						return _elm_lang$core$Native_Utils.update(
+							_p14,
+							{x: newPos.x, y: newPos.y, left: newLeft, right: newRight});
+					},
+					list)));
+	});
+var _user$project$View$strTreeView = function (tree) {
+	return A2(
+		_elm_lang$svg$Svg$svg,
+		{
+			ctor: '::',
+			_0: _elm_lang$svg$Svg_Attributes$width(
+				_elm_lang$core$Basics$toString(_user$project$View$width)),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$height(
+					_elm_lang$core$Basics$toString(_user$project$View$height)),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$viewBox(
+						A2(
+							_elm_lang$core$String$join,
+							' ',
+							A2(
+								_elm_lang$core$List$map,
+								_elm_lang$core$Basics$toString,
+								{
+									ctor: '::',
+									_0: 0,
+									_1: {
+										ctor: '::',
+										_0: 0,
+										_1: {
+											ctor: '::',
+											_0: _user$project$View$width,
+											_1: {
+												ctor: '::',
+												_0: _user$project$View$height,
+												_1: {ctor: '[]'}
+											}
+										}
+									}
+								}))),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$style(
+							{
+								ctor: '::',
+								_0: {ctor: '_Tuple2', _0: 'border', _1: '1px solid black'},
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		},
+		{
+			ctor: '::',
+			_0: A2(_user$project$View$drawTree, _user$project$Model$String, tree),
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$View$numTreeView = function (tree) {
+	return A2(
+		_elm_lang$svg$Svg$svg,
+		{
+			ctor: '::',
+			_0: _elm_lang$svg$Svg_Attributes$width(
+				_elm_lang$core$Basics$toString(_user$project$View$width)),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$height(
+					_elm_lang$core$Basics$toString(_user$project$View$height)),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$viewBox(
+						A2(
+							_elm_lang$core$String$join,
+							' ',
+							A2(
+								_elm_lang$core$List$map,
+								_elm_lang$core$Basics$toString,
+								{
+									ctor: '::',
+									_0: 0,
+									_1: {
+										ctor: '::',
+										_0: 0,
+										_1: {
+											ctor: '::',
+											_0: _user$project$View$width,
+											_1: {
+												ctor: '::',
+												_0: _user$project$View$height,
+												_1: {ctor: '[]'}
+											}
+										}
+									}
+								}))),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$style(
+							{
+								ctor: '::',
+								_0: {ctor: '_Tuple2', _0: 'border', _1: '1px solid black'},
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		},
+		{
+			ctor: '::',
+			_0: A2(_user$project$View$drawTree, _user$project$Model$Number, tree),
+			_1: {ctor: '[]'}
+		});
 };
 var _user$project$View$view = function (model) {
 	return A2(
@@ -9133,35 +9397,66 @@ var _user$project$View$view = function (model) {
 		{
 			ctor: '::',
 			_0: A2(
-				_elm_lang$html$Html$input,
+				_elm_lang$html$Html$select,
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html_Events$onInput(_user$project$Model$Input),
+					_0: _user$project$View$onChange(_user$project$Model$ChangeType),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$option,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$value('0'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('Number'),
+							_1: {ctor: '[]'}
+						}),
 					_1: {
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$value(
-							A2(
-								_elm_lang$core$Maybe$withDefault,
-								'',
-								A2(_elm_lang$core$Maybe$map, _elm_lang$core$Basics$toString, model.input))),
+						_0: A2(
+							_elm_lang$html$Html$option,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$value('1'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text('String'),
+								_1: {ctor: '[]'}
+							}),
 						_1: {ctor: '[]'}
 					}
-				},
-				{ctor: '[]'}),
+				}),
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_elm_lang$html$Html$button,
+					_elm_lang$html$Html$input,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Events$onClick(_user$project$Model$Add),
-						_1: {ctor: '[]'}
+						_0: _elm_lang$html$Html_Events$onInput(_user$project$Model$Input),
+						_1: {
+							ctor: '::',
+							_0: _user$project$View$onEnter(_user$project$Model$Add),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$type_('text'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$value(
+										A2(_elm_lang$core$Maybe$withDefault, '', model.input)),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
 					},
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text('Add'),
-						_1: {ctor: '[]'}
-					}),
+					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
 					_0: A2(
@@ -9178,60 +9473,14 @@ var _user$project$View$view = function (model) {
 						},
 						{
 							ctor: '::',
-							_0: A2(
-								_elm_lang$svg$Svg$svg,
-								{
-									ctor: '::',
-									_0: _elm_lang$svg$Svg_Attributes$width(
-										_elm_lang$core$Basics$toString(_user$project$View$width)),
-									_1: {
-										ctor: '::',
-										_0: _elm_lang$svg$Svg_Attributes$height(
-											_elm_lang$core$Basics$toString(_user$project$View$height)),
-										_1: {
-											ctor: '::',
-											_0: _elm_lang$svg$Svg_Attributes$viewBox(
-												A2(
-													_elm_lang$core$String$join,
-													' ',
-													A2(
-														_elm_lang$core$List$map,
-														_elm_lang$core$Basics$toString,
-														{
-															ctor: '::',
-															_0: 0,
-															_1: {
-																ctor: '::',
-																_0: 0,
-																_1: {
-																	ctor: '::',
-																	_0: _user$project$View$width,
-																	_1: {
-																		ctor: '::',
-																		_0: _user$project$View$height,
-																		_1: {ctor: '[]'}
-																	}
-																}
-															}
-														}))),
-											_1: {
-												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$style(
-													{
-														ctor: '::',
-														_0: {ctor: '_Tuple2', _0: 'border', _1: '1px solid black'},
-														_1: {ctor: '[]'}
-													}),
-												_1: {ctor: '[]'}
-											}
-										}
-									}
-								},
-								{
-									ctor: '::',
-									_0: _user$project$View$drawTree(model.tree),
-									_1: {ctor: '[]'}
-								}),
+							_0: function () {
+								var _p15 = model.type_;
+								if (_p15.ctor === 'Number') {
+									return _user$project$View$numTreeView(model.numTree);
+								} else {
+									return _user$project$View$strTreeView(model.strTree);
+								}
+							}(),
 							_1: {ctor: '[]'}
 						}),
 					_1: {ctor: '[]'}
@@ -9244,39 +9493,158 @@ var _user$project$View$Drawable = F5(
 		return {x: a, y: b, val: c, left: d, right: e};
 	});
 
-var _user$project$Update$update = F2(
+var _user$project$Update$intToType = function (n) {
+	var _p0 = n;
+	switch (_p0) {
+		case 0:
+			return _user$project$Model$Number;
+		case 1:
+			return _user$project$Model$String;
+		default:
+			return _user$project$Model$Number;
+	}
+};
+var _user$project$Update$strUpdate = F2(
 	function (msg, model) {
-		var _p0 = msg;
-		if (_p0.ctor === 'Input') {
-			return A2(
-				_elm_lang$core$Platform_Cmd_ops['!'],
-				_elm_lang$core$Native_Utils.update(
-					model,
-					{
-						input: function (_p1) {
-							return _elm_lang$core$Result$toMaybe(
-								_elm_lang$core$String$toInt(_p1));
-						}(_p0._0)
-					}),
-				{ctor: '[]'});
-		} else {
-			var _p2 = model.input;
-			if (_p2.ctor === 'Just') {
+		var _p1 = msg;
+		switch (_p1.ctor) {
+			case 'Input':
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
 					_elm_lang$core$Native_Utils.update(
 						model,
 						{
-							tree: A2(_user$project$BST$insert, _p2._0, model.tree),
-							input: _elm_lang$core$Maybe$Nothing
+							input: _elm_lang$core$Maybe$Just(_p1._0)
 						}),
 					{ctor: '[]'});
-			} else {
+			case 'Add':
+				var _p2 = model.input;
+				if (_p2.ctor === 'Just') {
+					return A2(
+						_elm_lang$core$Platform_Cmd_ops['!'],
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{
+								strTree: A2(_user$project$BST$insert, _p2._0, model.strTree),
+								input: _elm_lang$core$Maybe$Nothing
+							}),
+						{ctor: '[]'});
+				} else {
+					return A2(
+						_elm_lang$core$Platform_Cmd_ops['!'],
+						model,
+						{ctor: '[]'});
+				}
+			case 'Delete':
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
-					model,
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{
+							strTree: A2(_user$project$BST$delete, _p1._0, model.strTree)
+						}),
 					{ctor: '[]'});
-			}
+			default:
+				var _p3 = _elm_lang$core$String$toInt(_p1._0);
+				if (_p3.ctor === 'Ok') {
+					return A2(
+						_elm_lang$core$Platform_Cmd_ops['!'],
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{
+								type_: _user$project$Update$intToType(_p3._0)
+							}),
+						{ctor: '[]'});
+				} else {
+					return A2(
+						_elm_lang$core$Platform_Cmd_ops['!'],
+						model,
+						{ctor: '[]'});
+				}
+		}
+	});
+var _user$project$Update$numUpdate = F2(
+	function (msg, model) {
+		var _p4 = msg;
+		switch (_p4.ctor) {
+			case 'Input':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{
+							input: _elm_lang$core$Maybe$Just(_p4._0)
+						}),
+					{ctor: '[]'});
+			case 'Add':
+				var val = A2(
+					_elm_lang$core$Maybe$andThen,
+					function (_p5) {
+						return _elm_lang$core$Result$toMaybe(
+							_elm_lang$core$String$toFloat(_p5));
+					},
+					model.input);
+				var _p6 = val;
+				if (_p6.ctor === 'Just') {
+					return A2(
+						_elm_lang$core$Platform_Cmd_ops['!'],
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{
+								numTree: A2(_user$project$BST$insert, _p6._0, model.numTree),
+								input: _elm_lang$core$Maybe$Nothing
+							}),
+						{ctor: '[]'});
+				} else {
+					return A2(
+						_elm_lang$core$Platform_Cmd_ops['!'],
+						model,
+						{ctor: '[]'});
+				}
+			case 'Delete':
+				var val = _elm_lang$core$String$toFloat(_p4._0);
+				var _p7 = val;
+				if (_p7.ctor === 'Ok') {
+					return A2(
+						_elm_lang$core$Platform_Cmd_ops['!'],
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{
+								numTree: A2(_user$project$BST$delete, _p7._0, model.numTree)
+							}),
+						{ctor: '[]'});
+				} else {
+					return A2(
+						_elm_lang$core$Platform_Cmd_ops['!'],
+						model,
+						{ctor: '[]'});
+				}
+			default:
+				var _p8 = _elm_lang$core$String$toInt(_p4._0);
+				if (_p8.ctor === 'Ok') {
+					return A2(
+						_elm_lang$core$Platform_Cmd_ops['!'],
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{
+								type_: _user$project$Update$intToType(_p8._0)
+							}),
+						{ctor: '[]'});
+				} else {
+					return A2(
+						_elm_lang$core$Platform_Cmd_ops['!'],
+						model,
+						{ctor: '[]'});
+				}
+		}
+	});
+var _user$project$Update$update = F2(
+	function (msg, model) {
+		var _p9 = model.type_;
+		if (_p9.ctor === 'Number') {
+			return A2(_user$project$Update$numUpdate, msg, model);
+		} else {
+			return A2(_user$project$Update$strUpdate, msg, model);
 		}
 	});
 
