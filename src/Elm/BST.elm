@@ -104,20 +104,22 @@ minimum tree =
     case tree of
         Leaf ->
             Nothing
-        
+
         Node l x _ ->
             if l == Leaf then
                 Just x
             else
                 minimum l
 
-length : Tree comparable -> Int
-length tree =
+
+num : Tree comparable -> Int
+num tree =
     case tree of
         Leaf ->
             0
+
         Node l x r ->
-            length l + 1 + length r
+            num l + 1 + num r
 
 
 leftNum : Tree comparable -> Int
@@ -125,16 +127,19 @@ leftNum tree =
     case tree of
         Leaf ->
             0
+
         Node l _ _ ->
-            leftNum l + 1
+            num l
+
 
 rightNum : Tree comparable -> Int
 rightNum tree =
     case tree of
         Leaf ->
             0
+
         Node _ _ r ->
-            rightNum r + 1
+            num r
 
 
 fromList : List comparable -> Tree comparable
@@ -145,4 +150,4 @@ fromList list =
 toList : Tree comparable -> List comparable
 toList tree =
     fold (::) [] tree
-    |> List.reverse
+        |> List.reverse

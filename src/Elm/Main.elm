@@ -34,12 +34,13 @@ main =
         , subscriptions = always Sub.none
         }
 
+
 view : Model -> Html Msg
 view model =
     svg
-        [ Svg.width "640"
-        , Svg.height "640"
-        , Svg.viewBox "0 0 640 640"
+        [ Svg.width <| toString width
+        , Svg.height <| toString height
+        , [0, 0, width, height] |> List.map toString |> String.join " " |> Svg.viewBox
         , Html.style [ ( "border", "1px solid black" ) ]
         ]
         [ drawTree model.tree
@@ -48,7 +49,7 @@ view model =
 
 width : Float
 width =
-    640
+    1024
 
 
 height : Float
@@ -58,7 +59,7 @@ height =
 
 xScale : Tree comparable -> Float -> Float
 xScale t n =
-    width / (toFloat <| BST.length t) * n
+    width / (toFloat <| BST.num t) * n
 
 
 yScale : Tree comparable -> Float -> Float
@@ -73,7 +74,7 @@ drawTree tree =
             exchange 0 tree |> Tuple.second
 
         radius =
-            width / (toFloat <| BST.length tree) / 2
+            width / (toFloat <| BST.num tree) / 2
 
         depth =
             toFloat <| BST.depth tree
@@ -124,7 +125,7 @@ exchange x tree =
                     exchange x left
 
                 ( rx, rli ) =
-                    exchange (lx + 1.0) right
+                    exchange (lx + 1) right
 
                 this =
                     { x = lx
@@ -134,12 +135,20 @@ exchange x tree =
                         if left == Leaf then
                             Nothing
                         else
-                            Just ({ x = lx - (toFloat <| BST.rightNum left), y = toFloat <| BST.depth left })
+                            Just
+                                ({ x = lx - 1 - (toFloat <| BST.rightNum left)
+                                 , y = toFloat <| BST.depth left
+                                 }
+                                )
                     , right =
                         if right == Leaf then
                             Nothing
                         else
-                            Just ({ x = rx - (toFloat <| BST.leftNum right), y = toFloat <| BST.depth right })
+                            Just
+                                ({ x = lx + 1 + (toFloat <| BST.leftNum right)
+                                 , y = toFloat <| BST.depth right
+                                 }
+                                )
                     }
             in
                 ( rx, lli ++ [ this ] ++ rli )
