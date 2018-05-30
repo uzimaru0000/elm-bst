@@ -2,11 +2,13 @@ module View exposing (..)
 
 import Html exposing (..)
 import Html.Attributes as Html exposing (..)
-import Html.Events exposing (..)
+import Html.Events as Html exposing (..)
 import Svg exposing (..)
 import Svg.Attributes as Svg exposing (..)
+import Svg.Events as Svg exposing (..)
 import BST exposing (..)
 import Model exposing (..)
+import Json.Decode as Json
 
 
 view : Model -> Html Msg
@@ -14,13 +16,13 @@ view model =
     div []
         [ input
             [ onInput Input
+            , onEnter Add
+            , Html.type_ "text"
             , model.input
-                |> Maybe.map toString
                 |> Maybe.withDefault ""
                 |> value
             ]
             []
-        , button [ onClick Add ] [ Html.text "Add" ]
         , div [ Html.style [ ( "margin", "10px" ) ] ]
             [ svg
                 [ Svg.width <| toString width
@@ -67,7 +69,7 @@ yScale t n =
     height / (toFloat <| BST.depth t) * n
 
 
-drawTree : Tree comparable -> Svg Msg
+drawTree : Tree String -> Svg Msg
 drawTree tree =
     let
         list =
@@ -154,7 +156,7 @@ exchange x tree =
                 ( rx, lli ++ [ this ] ++ rli )
 
 
-draw : Float -> Drawable comparable -> Svg Msg
+draw : Float -> Drawable String -> Svg Msg
 draw radius { x, y, val, left, right } =
     let
         drawLine p =
@@ -163,7 +165,7 @@ draw radius { x, y, val, left, right } =
                 , Svg.y1 <| toString y
                 , Svg.x2 <| toString p.x
                 , Svg.y2 <| toString p.y
-                , Svg.stroke "blue"
+                , Svg.stroke "#2196F3"
                 ]
                 []
     in
@@ -172,7 +174,8 @@ draw radius { x, y, val, left, right } =
                 [ Svg.cx <| toString x
                 , Svg.cy <| toString y
                 , Svg.r <| toString radius
-                , Svg.fill "blue"
+                , Svg.fill "#2196F3"
+                , Svg.onClick (Delete val)
                 ]
                 []
             , left
@@ -188,5 +191,16 @@ draw radius { x, y, val, left, right } =
                 , Svg.fontSize <| toString <| radius
                 , Svg.textAnchor "middle"
                 ]
-                [ Svg.text <| toString val ]
+                [ Svg.text val ]
             ]
+
+onEnter : Msg -> Html.Attribute Msg
+onEnter msg =
+    let
+        isEnter code =
+            if code == 13 then
+                Json.succeed msg
+            else
+                Json.fail "not Enter"
+    in
+        Html.on "keydown" (Json.andThen isEnter keyCode)

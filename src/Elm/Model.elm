@@ -5,11 +5,12 @@ import BST exposing (..)
 type Msg
     = Input String
     | Add
+    | Delete String
 
 
 type alias Model =
-    { tree : Tree Int
-    , input : Maybe Int
+    { tree : Tree String
+    , input : Maybe String
     }
 
 

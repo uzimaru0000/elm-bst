@@ -46,6 +46,65 @@ search x tree =
                 True
 
 
+getValue : Tree comparable -> Maybe comparable
+getValue tree =
+    case tree of
+        Leaf ->
+            Nothing
+        Node _ v _ ->
+            Just v
+
+getLeft : Tree comparable -> Tree comparable
+getLeft tree =
+    case tree of
+        Leaf ->
+            Leaf
+        Node l _ _ ->
+            l
+
+getRight : Tree comparable -> Tree comparable
+getRight tree =
+    case tree of
+        Leaf ->
+            Leaf
+        Node _ _ r ->
+            r
+
+deleteMin : Tree comparable -> Tree comparable
+deleteMin tree =
+    case tree of
+        Leaf ->
+            Leaf
+        Node Leaf _ r ->
+            r
+        Node l x r ->
+            Node (deleteMin l) x r
+
+
+delete : comparable -> Tree comparable -> Tree comparable
+delete x tree =
+    let
+        delete_ l r =
+            case (l, r) of
+                (Leaf, r) -> r
+                (l, Leaf) -> l
+                _ -> 
+                    case minimum r of
+                        Just x_ -> Node l x_ (deleteMin r)
+                        _ -> tree
+    in
+        case tree of
+            Leaf ->
+                Leaf
+            Node l v r ->
+                if x < v then
+                    Node (delete x l) v r
+                else if x > v then
+                    Node l v (delete x r)
+                else
+                    delete_ l r
+
+
 depth : Tree comparable -> Int
 depth tree =
     case tree of
