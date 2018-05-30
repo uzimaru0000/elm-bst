@@ -6,16 +6,26 @@ type Msg
     = Input String
     | Add
     | Delete String
+    | ChangeType String
+
+
+type Type
+    = Number
+    | String
 
 
 type alias Model =
-    { tree : Tree String
+    { strTree : Tree String
+    , numTree : Tree Float
     , input : Maybe String
+    , type_ : Type
     }
 
 
 init : Model
 init =
-    { tree = fromList []
+    { strTree = fromList []
+    , numTree = fromList []
     , input = Nothing
+    , type_ = Number
     }

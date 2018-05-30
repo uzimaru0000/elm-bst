@@ -14,7 +14,12 @@ import Json.Decode as Json
 view : Model -> Html Msg
 view model =
     div []
-        [ input
+        [ select
+            [ onChange ChangeType ]
+            [ option [ value "0" ] [ Html.text "Number" ]
+            , option [ value "1" ] [ Html.text "String" ]
+            ]
+        , input
             [ onInput Input
             , onEnter Add
             , Html.type_ "text"
@@ -24,17 +29,35 @@ view model =
             ]
             []
         , div [ Html.style [ ( "margin", "10px" ) ] ]
-            [ svg
-                [ Svg.width <| toString width
-                , Svg.height <| toString height
-                , [ 0, 0, width, height ] |> List.map toString |> String.join " " |> Svg.viewBox
-                , Html.style [ ( "border", "1px solid black" ) ]
-                ]
-                [ drawTree model.tree
-                ]
+            [ case model.type_ of
+                Number -> numTreeView model.numTree
+                String -> strTreeView model.strTree
             ]
         ]
 
+
+numTreeView : Tree Float -> Svg Msg
+numTreeView tree =
+    svg
+        [ Svg.width <| toString width
+        , Svg.height <| toString height
+        , [ 0, 0, width, height ] |> List.map toString |> String.join " " |> Svg.viewBox
+        , Html.style [ ( "border", "1px solid black" ) ]
+        ]
+        [ drawTree Number tree
+        ]
+
+
+strTreeView : Tree String -> Svg Msg
+strTreeView tree =
+    svg
+        [ Svg.width <| toString width
+        , Svg.height <| toString height
+        , [ 0, 0, width, height ] |> List.map toString |> String.join " " |> Svg.viewBox
+        , Html.style [ ( "border", "1px solid black" ) ]
+        ]
+        [ drawTree String tree
+        ]
 
 
 {- Settings -}
@@ -69,8 +92,8 @@ yScale t n =
     height / (toFloat <| BST.depth t) * n
 
 
-drawTree : Tree String -> Svg Msg
-drawTree tree =
+drawTree : Type -> Tree comparable -> Svg Msg
+drawTree t tree =
     let
         list =
             exchange 0 tree |> Tuple.second
@@ -111,7 +134,7 @@ drawTree tree =
                             , right = newRight
                         }
                 )
-            |> List.map (draw radius)
+            |> List.map (draw t radius)
             |> g []
 
 
@@ -156,8 +179,8 @@ exchange x tree =
                 ( rx, lli ++ [ this ] ++ rli )
 
 
-draw : Float -> Drawable String -> Svg Msg
-draw radius { x, y, val, left, right } =
+draw : Type -> Float -> Drawable comparable -> Svg Msg
+draw t radius { x, y, val, left, right } =
     let
         drawLine p =
             line
@@ -175,7 +198,7 @@ draw radius { x, y, val, left, right } =
                 , Svg.cy <| toString y
                 , Svg.r <| toString radius
                 , Svg.fill "#2196F3"
-                , Svg.onClick (Delete val)
+                , Svg.onClick (Delete <| toString val)
                 ]
                 []
             , left
@@ -191,10 +214,11 @@ draw radius { x, y, val, left, right } =
                 , Svg.fontSize <| toString <| radius
                 , Svg.textAnchor "middle"
                 ]
-                [ Svg.text val ]
+                [ Svg.text <| toString val ]
             ]
 
-onEnter : Msg -> Html.Attribute Msg
+
+onEnter : msg -> Html.Attribute msg
 onEnter msg =
     let
         isEnter code =
@@ -204,3 +228,8 @@ onEnter msg =
                 Json.fail "not Enter"
     in
         Html.on "keydown" (Json.andThen isEnter keyCode)
+
+
+onChange : (String -> msg) -> Html.Attribute msg
+onChange msg =
+    Html.on "change" (Json.map msg targetValue)
